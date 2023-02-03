@@ -54,6 +54,11 @@ public:
             current= current->next;
         }
     }
+
+    bool operator>(const Player &opponent) const
+    {
+        return health > opponent.health;
+    }
     
 };
 
@@ -78,5 +83,14 @@ int main()
         player1.displayMoves();
     }
 
+    if(player1 > player2)
+    {
+        cout << "Player 1 wins!" << endl;
+        player1.displayMoves();
+    }
+    else{
+        cout << "Player 2 wins!" << endl;
+        player2.displayMoves();
+    }
     return 0;
 }
