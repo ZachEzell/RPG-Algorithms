@@ -68,11 +68,32 @@ In the assignment operator overload, the this keyword refers to the current obje
 By using the this pointer, we can ensure that the assignment operator only performs a deep copy if it is assigning an object to a different instance, not when it is assigning an object to itself.
 
 
+What's up with return *this?
+
+In the context of the game script, return *this in the Player class' method means that the method is returning the object that the method was called on. The * operator is used to dereference the this pointer, which is a pointer to the object that the method was called on.
+
+For example, if you have an instance of the Player class p1, and you call the method winner on it like this: p1.winner(), then this inside the winner method would be a pointer to p1. When you dereference this using *this, you get the actual Player object that the method was called on, in this case p1. By returning *this, the winner method returns the Player object that the method was called on.
+
+In the code, this is likely used to return the winning Player object after the two Player objects have battled each other.
+
+
+
+What is the linked list doing in the deep copy?
+
+In the code, the linked list is used to represent the list of moves made by a Player in a battle. The linked list is being implemented using a deep copy in the assignment operator operator=. The purpose of the deep copy is to make sure that the linked list of moves in the left-hand side object is not just a shallow copy of the linked list in the right-hand side object, but a separate, independent copy of the linked list.
+
+When the operator= function is called on a Player object, it first checks if the object being assigned to is not the same as the object being assigned from (i.e., the right-hand side object). If the two objects are different, then the linked list in the left-hand side object is emptied by setting the head and tail pointers to NULL.
+
+The next step is to copy over the linked list of moves from the right-hand side object to the left-hand side object. To do this, the code uses a loop to iterate through the linked list of moves in the right-hand side object. On the first pass through the loop, the head of the linked list in the left-hand side object is set to a new Move object that is a copy of the first move in the right-hand side object. On subsequent passes through the loop, new Move objects are created and added to the end of the linked list in the left-hand side object. The tail pointer is updated to point to the last Move object in the linked list, so that new moves can be added to the end of the list.
+
+When the loop finishes, the linked list in the left-hand side object is a separate, deep copy of the linked list in the right-hand side object. After the copy, the operator= function returns a reference to the left-hand side object, allowing for chaining of assignment operations. 
+
 
 
 Tutorial Goal:
 
 
-Add a functionality that overloads the ">" operator to return the object of the winner by using a deep copy.
+Add a functionality that overloads the "=" operator to set a winner to whatever player wins. 
+
 Print out the damage done by the winner object at the end.
 
