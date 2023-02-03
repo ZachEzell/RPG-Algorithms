@@ -73,5 +73,6 @@ By using the this pointer, we can ensure that the assignment operator only perfo
 Tutorial Goal:
 
 
-Add a functionality where
+Add a functionality that overloads the ">" operator to return the object of the winner by using a deep copy.
+Print out the damage done by the winner object at the end.
 
